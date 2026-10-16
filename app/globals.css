@@ -1,0 +1,101 @@
+@import "tailwindcss";
+
+@theme inline {
+  --font-sans: var(--font-outfit), ui-sans-serif, system-ui, sans-serif;
+  --font-display: var(--font-syne), ui-sans-serif, system-ui, sans-serif;
+  --color-ink: #f7f2ff;
+  --color-mist: #c4b5fd;
+  --color-deep: #09040f;
+}
+
+:root {
+  color-scheme: dark;
+}
+
+html,
+body {
+  min-height: 100%;
+}
+
+body {
+  font-family: var(--font-sans);
+  background: var(--color-deep);
+  color: var(--color-ink);
+}
+
+::selection {
+  background: #c026d3;
+  color: white;
+}
+
+:focus-visible {
+  outline: 2px solid #f5d0fe;
+  outline-offset: 3px;
+}
+
+button,
+a {
+  cursor: pointer;
+}
+
+button:disabled {
+  cursor: not-allowed;
+}
+
+.glass {
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.075), rgba(255, 255, 255, 0.03));
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  box-shadow: 0 18px 50px rgba(24, 0, 48, 0.28);
+  backdrop-filter: blur(18px);
+}
+
+.card-face {
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+}
+
+.orb {
+  position: absolute;
+  border-radius: 999px;
+  filter: blur(30px);
+  animation: drift 22s ease-in-out infinite;
+}
+
+.orb-a {
+  top: -14rem;
+  left: -10rem;
+  width: 42rem;
+  height: 42rem;
+  background: radial-gradient(circle, rgba(109, 40, 217, 0.85), transparent 68%);
+}
+
+.orb-b {
+  right: -12rem;
+  bottom: -16rem;
+  width: 38rem;
+  height: 38rem;
+  background: radial-gradient(circle, rgba(192, 38, 211, 0.55), transparent 70%);
+  animation-delay: -8s;
+}
+
+.grid-fade {
+  position: absolute;
+  inset: 0;
+  background-image:
+    linear-gradient(rgba(196, 181, 253, 0.08) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(196, 181, 253, 0.08) 1px, transparent 1px);
+  background-size: 52px 52px;
+  mask-image: radial-gradient(ellipse at center, black 20%, transparent 75%);
+}
+
+@keyframes drift {
+  50% {
+    transform: translate3d(4%, -3%, 0) scale(1.06);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .orb {
+    animation: none;
+  }
+}
