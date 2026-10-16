@@ -146,10 +146,10 @@ function LeaderRow({
     <motion.li
       layout
       transition={reduce ? { duration: 0 } : { type: "spring", stiffness: 420, damping: 34 }}
-      className={`relative overflow-hidden rounded-2xl border px-3 py-3 ${row.you ? "border-[#6a2ff0] bg-[#f4eeff]" : "border-[#6a2ff01a] bg-white"}`}
+      className={`relative overflow-hidden rounded-2xl border px-3 py-3 ${row.you ? "border-[#6a2ff0] bg-[#f7f3ff]" : "border-[#6a2ff01a] bg-[#f7f3ff]"}`}
     >
       <motion.span
-        className="absolute inset-y-0 left-0 bg-[#6a2ff0]/12"
+        className="absolute inset-y-0 left-0 bg-[#cbb6ff]"
         initial={false}
         animate={{ width: `${Math.max(8, (row.points / max) * 100)}%` }}
         transition={reduce ? { duration: 0 } : { duration: 0.6 }}
