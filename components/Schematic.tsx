@@ -33,22 +33,22 @@ export function Schematic({ seed }: { seed: number }) {
     <svg viewBox="0 0 200 250" className="h-full w-full" aria-hidden>
       <defs>
         <linearGradient id={`s-${seed}`} x1="0" y1="0" x2="1" y2="1">
-          <stop offset="0%" stopColor="#f5d0fe" />
-          <stop offset="100%" stopColor="#a78bfa" />
+          <stop offset="0%" stopColor="#8b45ff" />
+          <stop offset="100%" stopColor="#4b17c9" />
         </linearGradient>
       </defs>
-      <rect x="8" y="8" width="184" height="234" rx="18" fill="rgba(255,255,255,0.03)" stroke="rgba(255,255,255,0.08)" />
+      <rect x="8" y="8" width="184" height="234" rx="18" fill="#efe8ff" stroke="#6a2ff033" />
       {traces.map((d, index) => (
         <path key={`${index}-${d}`} d={d} fill="none" stroke={`url(#s-${seed})`} strokeWidth="1.4" />
       ))}
       {pads.map((pad) => (
-        <rect key={`${pad.x}-${pad.y}`} x={pad.x} y={pad.y} width="16" height="10" rx="2" fill="none" stroke="rgba(245,208,254,0.7)" />
+        <rect key={`${pad.x}-${pad.y}`} x={pad.x} y={pad.y} width="16" height="10" rx="2" fill="none" stroke="#6a2ff0" />
       ))}
       {vias.map((via) => (
-        <circle key={`${via.cx}-${via.cy}`} cx={via.cx} cy={via.cy} r="3.2" fill="none" stroke="#f0abfc" strokeWidth="1.2" />
+        <circle key={`${via.cx}-${via.cy}`} cx={via.cx} cy={via.cy} r="3.2" fill="none" stroke="#7b3bff" strokeWidth="1.2" />
       ))}
-      <rect x={chip.x} y={chip.y} width={chip.w} height={chip.h} rx="6" fill="#2e1065" stroke="#f5d0fe" />
-      <path d={`M${chip.x + 10} ${chip.y + 14} h14 M${chip.x + 10} ${chip.y + 22} h22 M${chip.x + 10} ${chip.y + 30} h10`} stroke="#e9d5ff" strokeWidth="1.3" />
+      <rect x={chip.x} y={chip.y} width={chip.w} height={chip.h} rx="6" fill="#6a2ff0" stroke="#4b17c9" />
+      <path d={`M${chip.x + 10} ${chip.y + 14} h14 M${chip.x + 10} ${chip.y + 22} h22 M${chip.x + 10} ${chip.y + 30} h10`} stroke="#f3eeff" strokeWidth="1.3" />
     </svg>
   );
 }

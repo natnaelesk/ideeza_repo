@@ -38,10 +38,10 @@ export function PointsView() {
               <Link
                 key={category.id}
                 href={`/challenges#${category.id}`}
-                className="glass group rounded-[28px] p-5 transition hover:-translate-y-0.5 hover:border-fuchsia-300/40"
+                className="glass group rounded-[28px] p-5 transition hover:-translate-y-0.5 hover:border-[#6a2ff059]"
               >
                 <span className="flex items-center justify-between">
-                  <span className="grid h-11 w-11 place-items-center rounded-2xl bg-white/10">
+                  <span className="grid h-11 w-11 place-items-center rounded-2xl bg-[#efe8ff] text-[#4b17c9]">
                     <Icon name={ICONS[category.id]} className="h-5 w-5" />
                   </span>
                   <span className="font-display text-3xl tabular-nums">{headline}</span>
@@ -63,14 +63,14 @@ export function PointsView() {
         <div className="grid gap-3 lg:grid-cols-2">
           {cohort.tickets.map((ticket) => (
             <article key={ticket.id} className="pack-golden rounded-[28px] p-[3px]">
-              <div className="relative grid gap-4 overflow-hidden rounded-[25px] bg-[#1a1204] p-5 sm:grid-cols-[1fr_auto] sm:items-center">
+              <div className="relative grid gap-4 overflow-hidden rounded-[25px] bg-gradient-to-br from-[#fff8e8] to-white p-5 text-ink sm:grid-cols-[1fr_auto] sm:items-center">
                 <span className="holo-shiny pointer-events-none absolute inset-0" />
                 <div className="relative">
-                  <p className="text-[11px] font-semibold tracking-[0.18em] text-amber-100 uppercase">Shiny · Golden Ticket</p>
+                  <p className="text-[11px] font-semibold tracking-[0.18em] text-amber-800 uppercase">Shiny · Golden Ticket</p>
                   <h3 className="mt-1 font-display text-2xl">{ticket.name}</h3>
-                  <p className="mt-2 text-sm text-amber-50">{ticket.reward}</p>
+                  <p className="mt-2 text-sm text-ink">{ticket.reward}</p>
                 </div>
-                <div className="relative flex items-center justify-between gap-3 border-t border-dashed border-amber-200/30 pt-4 sm:w-36 sm:flex-col sm:border-t-0 sm:border-l sm:pt-0 sm:pl-4">
+                <div className="relative flex items-center justify-between gap-3 border-t border-dashed border-amber-400/50 pt-4 sm:w-36 sm:flex-col sm:border-t-0 sm:border-l sm:pt-0 sm:pl-4">
                   <p className="font-display text-2xl tabular-nums">{formatPoints(ticket.points)}</p>
                   <button
                     type="button"
@@ -146,17 +146,17 @@ function LeaderRow({
     <motion.li
       layout
       transition={reduce ? { duration: 0 } : { type: "spring", stiffness: 420, damping: 34 }}
-      className={`relative overflow-hidden rounded-2xl border px-3 py-3 ${row.you ? "border-fuchsia-300/50 bg-fuchsia-500/10" : "border-white/10 bg-white/[0.03]"}`}
+      className={`relative overflow-hidden rounded-2xl border px-3 py-3 ${row.you ? "border-[#6a2ff0] bg-[#f4eeff]" : "border-[#6a2ff01a] bg-white"}`}
     >
       <motion.span
-        className="absolute inset-y-0 left-0 bg-violet-400/15"
+        className="absolute inset-y-0 left-0 bg-[#6a2ff0]/12"
         initial={false}
         animate={{ width: `${Math.max(8, (row.points / max) * 100)}%` }}
         transition={reduce ? { duration: 0 } : { duration: 0.6 }}
       />
       <span className="relative flex items-center gap-3">
         <span className="w-6 text-center text-sm text-mist tabular-nums">{row.rank}</span>
-        <span className="grid h-10 w-10 place-items-center rounded-full bg-gradient-to-br from-fuchsia-400 to-violet-800 text-xs font-semibold">
+        <span className="grid h-10 w-10 place-items-center rounded-full bg-gradient-to-br from-[#7b3bff] to-[#4b17c9] text-xs font-semibold text-white">
           {initials}
         </span>
         <span className="min-w-0 flex-1">
@@ -166,7 +166,7 @@ function LeaderRow({
           </span>
           <span className="block truncate text-xs text-mist">{row.campus}</span>
         </span>
-        {row.you && delta > 0 ? <span className="text-xs font-semibold text-emerald-300">▲{delta}</span> : null}
+        {row.you && delta > 0 ? <span className="text-xs font-semibold text-emerald-700">▲{delta}</span> : null}
         <span className="font-display text-lg tabular-nums">{formatPoints(row.points)}</span>
       </span>
     </motion.li>

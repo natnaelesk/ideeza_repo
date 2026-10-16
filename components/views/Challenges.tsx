@@ -3,7 +3,7 @@
 import Link from "next/link";
 import { useMemo, useState, type FormEvent } from "react";
 import { GoldenTicketCard, TradingCard } from "@/components/TradingCard";
-import { Modal, NextStep, PageHeader, chipClass, ghostClass, primaryClass } from "@/components/ui";
+import { Modal, NextStep, PageHeader, chipClass, fieldClass, ghostClass, primaryClass } from "@/components/ui";
 import { CATEGORIES, RARITY_META, RARITY_ORDER } from "@/lib/catalog";
 import { cn, formatPoints, validLink } from "@/lib/format";
 import { useCohort } from "@/lib/store";
@@ -111,18 +111,18 @@ export function ChallengesView() {
               <p className={cn("inline-flex rounded-full px-2.5 py-1 text-[10px] font-semibold tracking-[0.16em] uppercase", RARITY_META[active.rarity].chip)}>
                 {RARITY_META[active.rarity].label} · {formatPoints(active.points)} pts
               </p>
-              <p className="mt-4 text-sm leading-relaxed text-white/90">{active.brief}</p>
+              <p className="mt-4 text-sm leading-relaxed text-ink">{active.brief}</p>
               {active.availability === "open" ? (
                 <form onSubmit={submit} className="mt-5 space-y-3">
                   <label className="block text-sm">
                     <span className="text-mist">Link to the work</span>
-                    <input value={link} onChange={(event) => setLink(event.target.value)} placeholder="https://example.com/ideeza/your-build" className="mt-1 min-h-12 w-full rounded-2xl border border-white/10 bg-black/30 px-4 text-base outline-none" />
+                    <input value={link} onChange={(event) => setLink(event.target.value)} placeholder="https://example.com/ideeza/your-build" className={fieldClass} />
                   </label>
                   <label className="block text-sm">
                     <span className="text-mist">Note</span>
-                    <textarea value={note} onChange={(event) => setNote(event.target.value)} rows={4} placeholder="What you made, what broke, what you would print." className="mt-1 w-full rounded-2xl border border-white/10 bg-black/30 px-4 py-3 text-base outline-none" />
+                    <textarea value={note} onChange={(event) => setNote(event.target.value)} rows={4} placeholder="What you made, what broke, what you would print." className={`${fieldClass} py-3`} />
                   </label>
-                  {error ? <p className="text-sm text-rose-200">{error}</p> : null}
+                  {error ? <p className="text-sm text-rose-700">{error}</p> : null}
                   <div className="flex flex-wrap gap-2">
                     <button type="submit" className={primaryClass}>
                       Submit work

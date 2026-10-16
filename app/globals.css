@@ -1,15 +1,21 @@
 @import "tailwindcss";
 
 @theme inline {
-  --font-sans: var(--font-outfit), ui-sans-serif, system-ui, sans-serif;
-  --font-display: var(--font-syne), ui-sans-serif, system-ui, sans-serif;
-  --color-ink: #f7f2ff;
-  --color-mist: #c4b5fd;
-  --color-deep: #09040f;
+  --font-sans: var(--font-poppins), Poppins, ui-sans-serif, system-ui, sans-serif;
+  --font-display: var(--font-poppins), Poppins, ui-sans-serif, system-ui, sans-serif;
+  --color-ink: #1c0f45;
+  --color-mist: #5b4b8a;
+  --color-deep: #fbfaff;
+  --color-violet: #6a2ff0;
 }
 
 :root {
-  color-scheme: dark;
+  color-scheme: light;
+  --navy: #1c0f45;
+  --violet: #6a2ff0;
+  --lavender: #f3eeff;
+  --muted: #5b4b8a;
+  --surface: #ffffffd1;
 }
 
 html,
@@ -19,17 +25,20 @@ body {
 
 body {
   font-family: var(--font-sans);
-  background: var(--color-deep);
   color: var(--color-ink);
+  background:
+    radial-gradient(ellipse 70% 42% at 100% -8%, #e6dcff, transparent 58%),
+    radial-gradient(ellipse 55% 38% at -8% 12%, #efe8ff, transparent 52%),
+    linear-gradient(180deg, #fbfaff 0%, #f3eeff 48%, #efe8ff 100%);
 }
 
 ::selection {
-  background: #c026d3;
+  background: #6a2ff0;
   color: white;
 }
 
 :focus-visible {
-  outline: 2px solid #f5d0fe;
+  outline: 2px solid #6a2ff0;
   outline-offset: 3px;
 }
 
@@ -42,11 +51,84 @@ button:disabled {
   cursor: not-allowed;
 }
 
+.font-display {
+  font-weight: 800;
+  letter-spacing: -0.02em;
+}
+
+.btn-primary {
+  display: inline-flex;
+  min-height: 2.75rem;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  border-radius: 999px;
+  background: linear-gradient(90deg, #4b17c9, #7b3bff);
+  padding: 0.625rem 1.25rem;
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: #fff;
+  box-shadow: 0 12px 28px #5a1edc4d;
+  transition: filter 0.15s ease;
+}
+
+.btn-primary:hover {
+  filter: brightness(1.06);
+}
+
+.btn-primary:disabled {
+  cursor: not-allowed;
+  opacity: 0.45;
+  filter: none;
+}
+
+.btn-ghost {
+  display: inline-flex;
+  min-height: 2.75rem;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  border-radius: 999px;
+  border: 1.5px solid #6a2ff059;
+  background: #fff;
+  padding: 0.625rem 1.25rem;
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: #4b17c9;
+  transition: background 0.15s ease;
+}
+
+.btn-ghost:hover {
+  background: #f4eeff;
+}
+
+.btn-ghost:disabled {
+  cursor: not-allowed;
+  opacity: 0.45;
+}
+
+.field {
+  width: 100%;
+  border-radius: 14px;
+  border: 1.5px solid #6a2ff02e;
+  background: #fff;
+  color: #1c0f45;
+  outline: none;
+}
+
+.field::placeholder {
+  color: #5b4b8a8c;
+}
+
+.field:focus {
+  border-color: #6a2ff0;
+  box-shadow: 0 0 0 3px #6a2ff033;
+}
+
 .glass {
-  background: linear-gradient(180deg, rgba(255, 255, 255, 0.075), rgba(255, 255, 255, 0.03));
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  box-shadow: 0 18px 50px rgba(24, 0, 48, 0.28);
-  backdrop-filter: blur(18px);
+  background: linear-gradient(180deg, #ffffffeb, #f7f3ffd6);
+  border: 1.5px solid #6a2ff024;
+  box-shadow: 0 16px 40px #501ebe1a;
 }
 
 .card-face {
@@ -57,24 +139,24 @@ button:disabled {
 .orb {
   position: absolute;
   border-radius: 999px;
-  filter: blur(30px);
+  filter: blur(40px);
   animation: drift 22s ease-in-out infinite;
 }
 
 .orb-a {
-  top: -14rem;
-  left: -10rem;
-  width: 42rem;
-  height: 42rem;
-  background: radial-gradient(circle, rgba(109, 40, 217, 0.85), transparent 68%);
+  top: -16rem;
+  right: -8rem;
+  width: 36rem;
+  height: 36rem;
+  background: radial-gradient(circle, #e6dcff, transparent 68%);
 }
 
 .orb-b {
-  right: -12rem;
-  bottom: -16rem;
-  width: 38rem;
-  height: 38rem;
-  background: radial-gradient(circle, rgba(192, 38, 211, 0.55), transparent 70%);
+  bottom: -14rem;
+  left: -10rem;
+  width: 32rem;
+  height: 32rem;
+  background: radial-gradient(circle, #efe8ff, transparent 70%);
   animation-delay: -8s;
 }
 
@@ -82,10 +164,10 @@ button:disabled {
   position: absolute;
   inset: 0;
   background-image:
-    linear-gradient(rgba(196, 181, 253, 0.08) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(196, 181, 253, 0.08) 1px, transparent 1px);
+    linear-gradient(#6a2ff014 1px, transparent 1px),
+    linear-gradient(90deg, #6a2ff014 1px, transparent 1px);
   background-size: 52px 52px;
-  mask-image: radial-gradient(ellipse at center, black 20%, transparent 75%);
+  mask-image: radial-gradient(ellipse at center, black 15%, transparent 72%);
 }
 
 @keyframes drift {
@@ -95,27 +177,27 @@ button:disabled {
 }
 
 .pack-common {
-  background: #6d6780;
+  background: linear-gradient(145deg, #ddd4f2, #b7a8d8);
 }
 
 .pack-rare {
-  background: linear-gradient(145deg, #e0f2fe, #38bdf8 40%, #1e3a8a);
+  background: linear-gradient(145deg, #e0f2fe, #38bdf8 42%, #4b17c9);
 }
 
 .pack-epic {
-  background: linear-gradient(145deg, #fae8ff, #e879f9 42%, #6d28d9);
+  background: linear-gradient(145deg, #f3e8ff, #8b45ff 42%, #4b17c9);
 }
 
 .pack-legendary {
   background: linear-gradient(145deg, #fff7d6, #fbbf24 40%, #b45309);
-  box-shadow: 0 0 28px rgba(251, 191, 36, 0.28);
+  box-shadow: 0 10px 28px #f59e0b33;
 }
 
 .pack-golden {
-  background: linear-gradient(120deg, #fff4b0, #fbbf24, #fb7185, #67e8f9, #fde68a);
+  background: linear-gradient(120deg, #fff4b0, #fbbf24, #c084fc, #67e8f9, #fde68a);
   background-size: 220% 220%;
   animation: shine-shift 5s linear infinite;
-  box-shadow: 0 0 36px rgba(251, 191, 36, 0.45);
+  box-shadow: 0 12px 32px #f59e0b38;
 }
 
 .holo-rare,
@@ -123,17 +205,17 @@ button:disabled {
 .holo-legend,
 .holo-shiny {
   background-image: linear-gradient(
-    105deg,
-    transparent 18%,
-    rgba(255, 255, 255, 0.55) 32%,
-    rgba(255, 80, 160, 0.35) 44%,
-    rgba(80, 220, 255, 0.4) 54%,
-    rgba(255, 230, 80, 0.4) 64%,
-    transparent 80%
+    115deg,
+    transparent 16%,
+    rgb(106 47 240 / 16%) 32%,
+    rgb(255 255 255 / 85%) 46%,
+    rgb(56 189 248 / 28%) 56%,
+    rgb(251 191 36 / 32%) 68%,
+    transparent 84%
   );
   background-size: 220% 220%;
-  background-position: var(--mx, 20%) var(--my, 30%);
-  mix-blend-mode: color-dodge;
+  background-position: var(--mx, 18%) var(--my, 28%);
+  mix-blend-mode: multiply;
 }
 
 .holo-rare {
@@ -141,18 +223,24 @@ button:disabled {
 }
 
 .holo-epic {
-  opacity: 0.8;
+  opacity: 0.78;
 }
 
 .holo-legend {
-  opacity: 0.95;
+  opacity: 0.9;
 }
 
 .holo-shiny {
-  opacity: 1;
-  background-image: linear-gradient(115deg, #fff 0%, #fde68a 18%, #fb7185 36%, #67e8f9 54%, #e9d5ff 72%, #fde68a 100%);
+  opacity: 0.72;
+  background-image: linear-gradient(
+    115deg,
+    rgb(255 248 220 / 20%) 0%,
+    rgb(251 191 36 / 55%) 22%,
+    rgb(106 47 240 / 28%) 42%,
+    rgb(103 232 249 / 45%) 62%,
+    rgb(255 244 176 / 50%) 100%
+  );
   animation: shine-shift 3.2s linear infinite;
-  mix-blend-mode: soft-light;
 }
 
 @keyframes shine-shift {

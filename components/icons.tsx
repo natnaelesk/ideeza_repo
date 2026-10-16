@@ -24,8 +24,14 @@ export function Icon({ name, className }: { name: IconName; className?: string }
 export function Mark({ className }: { className?: string }) {
   return (
     <svg viewBox="0 0 32 32" className={className} aria-hidden>
-      <rect width="32" height="32" rx="10" fill="#241038" />
-      <path d="M16 5.2l2.2 6.4 6.6 1.5-5 4.2 1.5 6.6L16 20.6l-5.3 3.3 1.5-6.6-5-4.2 6.6-1.5z" fill="#f5d0fe" />
+      <defs>
+        <linearGradient id="ideeza-mark" x1="4" y1="2" x2="28" y2="30">
+          <stop offset="0%" stopColor="#7b3bff" />
+          <stop offset="100%" stopColor="#4b17c9" />
+        </linearGradient>
+      </defs>
+      <rect width="32" height="32" rx="10" fill="url(#ideeza-mark)" />
+      <path d="M16 5.2l2.2 6.4 6.6 1.5-5 4.2 1.5 6.6L16 20.6l-5.3 3.3 1.5-6.6-5-4.2 6.6-1.5z" fill="#fff" />
     </svg>
   );
 }

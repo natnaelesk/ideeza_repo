@@ -24,7 +24,7 @@ export function RoadmapView() {
 
   return (
     <div className="space-y-10">
-      <p className="max-w-2xl text-base leading-snug text-white sm:text-lg">
+      <p className="max-w-2xl text-base leading-snug text-ink sm:text-lg">
         Builders join, do challenge cards, earn points, refer friends, and unlock gifts plus an internship.
       </p>
       <section className="grid items-center gap-8 lg:grid-cols-[1.3fr_auto]">
@@ -34,15 +34,15 @@ export function RoadmapView() {
         <div className="glass flex items-center gap-5 rounded-[28px] p-5">
           <LevelRing progress={cohort.level.progress} initials={cohort.profile.initials} />
           <div>
-            <p className="text-[11px] tracking-[0.18em] text-fuchsia-200/80 uppercase">You are here</p>
+            <p className="text-[11px] font-semibold tracking-[0.18em] text-[#6a2ff0] uppercase">You are here</p>
             <p className="mt-1 font-display text-3xl">{cohort.level.level.name}</p>
             <p className="mt-1 text-sm text-mist">{formatPoints(cohort.points)} points</p>
             {cohort.level.next ? (
-              <p className="mt-2 text-sm text-white/80">
+              <p className="mt-2 text-sm text-mist">
                 {formatPoints(cohort.level.next.points - cohort.points)} to {cohort.level.next.name}
               </p>
             ) : (
-              <p className="mt-2 text-sm text-white/80">Top of the cohort path.</p>
+              <p className="mt-2 text-sm text-mist">Top of the cohort path.</p>
             )}
           </div>
         </div>
@@ -53,12 +53,12 @@ export function RoadmapView() {
         <ol className="flex gap-2 overflow-x-auto pb-1">
           {steps.map((step, index) => (
             <li key={step.label} className="flex items-center gap-2">
-              <Link href={step.href} className="glass block min-w-[10.5rem] rounded-2xl px-3 py-3 transition hover:border-fuchsia-300/40">
-                <span className="text-[11px] font-semibold text-fuchsia-200">Step {index + 1}</span>
+              <Link href={step.href} className="glass block min-w-[10.5rem] rounded-2xl px-3 py-3 transition hover:border-[#6a2ff059]">
+                <span className="text-[11px] font-semibold text-[#6a2ff0]">Step {index + 1}</span>
                 <span className="mt-1 block text-sm font-semibold leading-snug">{step.label}</span>
               </Link>
               {index < steps.length - 1 ? (
-                <span className="text-lg text-fuchsia-200/80" aria-hidden>
+                <span className="text-lg text-[#6a2ff0]" aria-hidden>
                   →
                 </span>
               ) : null}
@@ -76,9 +76,9 @@ export function RoadmapView() {
       <section>
         <SectionTitle title="The journey" aside={<span className="text-sm text-mist">{cohort.badges.filter((badge) => badge.unlocked).length} badges lit</span>} />
         <ol className="relative space-y-4 pl-0">
-          <div className="absolute top-6 bottom-6 left-6 w-px bg-white/10" aria-hidden>
+          <div className="absolute top-6 bottom-6 left-6 w-px bg-[#6a2ff026]" aria-hidden>
             <motion.div
-              className="w-full origin-top bg-gradient-to-b from-fuchsia-300 to-violet-600"
+              className="w-full origin-top bg-gradient-to-b from-[#8b45ff] to-[#4b17c9]"
               initial={false}
               animate={{ height: `${Math.min(100, fill * 100)}%` }}
               transition={reduce ? { duration: 0 } : { duration: 0.7 }}
@@ -91,10 +91,10 @@ export function RoadmapView() {
                 <div
                   className={`relative z-10 grid h-12 w-12 place-items-center rounded-full border text-sm font-semibold ${
                     level.current
-                      ? "border-fuchsia-300 bg-fuchsia-500/20 shadow-[0_0_24px_rgba(232,121,249,0.45)]"
+                      ? "border-[#6a2ff0] bg-[#efe8ff] text-[#4b17c9] shadow-[0_8px_24px_#6a2ff040]"
                       : level.unlocked
-                        ? "border-white/30 bg-[#1a0b2e]"
-                        : "border-white/10 bg-[#120816] text-mist"
+                        ? "border-[#6a2ff040] bg-white text-[#4b17c9]"
+                        : "border-[#6a2ff01a] bg-[#f7f3ff] text-mist"
                   }`}
                 >
                   {level.unlocked ? <Icon name="check" className="h-5 w-5" /> : index + 1}
@@ -107,7 +107,7 @@ export function RoadmapView() {
                 >
                   <span className="flex flex-wrap items-center justify-between gap-2">
                     <span className="font-display text-2xl">{level.name}</span>
-                    <span className="rounded-full bg-white/10 px-2.5 py-1 text-xs text-mist">{formatPoints(level.points)} pts</span>
+                    <span className="rounded-full bg-[#efe8ff] px-2.5 py-1 text-xs font-medium text-mist">{formatPoints(level.points)} pts</span>
                   </span>
                   <span className="mt-1 block text-sm text-mist">{level.summary}</span>
                   <AnimatePresence initial={false}>
@@ -118,7 +118,7 @@ export function RoadmapView() {
                         exit={{ height: 0, opacity: 0 }}
                         className="block overflow-hidden"
                       >
-                        <span className="mt-3 block border-t border-white/10 pt-3 text-sm leading-relaxed text-white/85">
+                        <span className="mt-3 block border-t border-[#6a2ff01f] pt-3 text-sm leading-relaxed text-ink">
                           {level.detail} Badge: {level.badge}.
                         </span>
                       </motion.span>
@@ -139,9 +139,9 @@ export function RoadmapView() {
               key={item.id}
               initial={false}
               animate={item.unlocked ? { opacity: 1, y: 0 } : { opacity: 0.55, y: 0 }}
-              className={`min-w-[11.5rem] rounded-3xl border p-4 ${item.unlocked ? "border-fuchsia-300/40 bg-fuchsia-500/10" : "border-white/10 bg-white/5"}`}
+              className={`min-w-[11.5rem] rounded-3xl border p-4 ${item.unlocked ? "border-[#6a2ff040] bg-[#f4eeff]" : "border-[#6a2ff01a] bg-white/80"}`}
             >
-              <p className="text-[10px] tracking-[0.16em] uppercase text-fuchsia-100/80">{item.unlocked ? "Unlocked" : "Locked"}</p>
+              <p className="text-[10px] font-semibold tracking-[0.16em] text-[#6a2ff0] uppercase">{item.unlocked ? "Unlocked" : "Locked"}</p>
               <h3 className="mt-2 font-display text-xl leading-tight">{item.label}</h3>
               <p className="mt-2 text-sm text-mist">{item.detail}</p>
             </motion.article>

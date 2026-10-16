@@ -5,16 +5,16 @@ import Link from "next/link";
 import { useEffect, useId, useRef, useState, type ReactNode } from "react";
 import { cn, formatPoints } from "@/lib/format";
 
-export const primaryClass =
-  "inline-flex min-h-11 items-center justify-center gap-2 rounded-full bg-gradient-to-r from-violet-500 via-fuchsia-500 to-violet-400 px-5 py-2.5 text-sm font-semibold text-white shadow-[0_12px_40px_rgba(168,85,247,0.38)] transition hover:brightness-110 disabled:cursor-not-allowed disabled:opacity-40 disabled:hover:brightness-100";
+export const primaryClass = "btn-primary";
 
-export const ghostClass =
-  "inline-flex min-h-11 items-center justify-center gap-2 rounded-full border border-white/15 bg-white/5 px-5 py-2.5 text-sm font-semibold text-white transition hover:bg-white/10 disabled:cursor-not-allowed disabled:opacity-40";
+export const ghostClass = "btn-ghost";
+
+export const fieldClass = "field mt-1 min-h-12 px-4 text-base";
 
 export function PageHeader({ explain, title }: { explain: string; title: string }) {
   return (
     <header className="max-w-2xl">
-      <p className="text-base leading-snug text-white sm:text-lg">{explain}</p>
+      <p className="text-base leading-snug text-ink sm:text-lg">{explain}</p>
       <h1 className="mt-3 font-display text-[2.4rem] leading-[1.02] tracking-tight sm:text-5xl">{title}</h1>
     </header>
   );
@@ -23,8 +23,8 @@ export function PageHeader({ explain, title }: { explain: string; title: string 
 export function NextStep({ href, label, onClick }: { href?: string; label: string; onClick?: () => void }) {
   const className = `${primaryClass} w-full sm:w-auto`;
   return (
-    <div className="flex flex-col gap-3 rounded-2xl border border-fuchsia-300/30 bg-fuchsia-500/10 px-4 py-3 sm:flex-row sm:items-center sm:justify-between">
-      <p className="text-sm font-medium text-fuchsia-100">Next step</p>
+    <div className="flex flex-col gap-3 rounded-2xl border border-[#6a2ff033] bg-[#f4eeff] px-4 py-3 sm:flex-row sm:items-center sm:justify-between">
+      <p className="text-sm font-semibold text-[#4b17c9]">Next step</p>
       {href ? (
         <Link href={href} className={className}>
           {label}
@@ -63,9 +63,9 @@ export function LevelRing({
   const reduce = useReducedMotion();
   return (
     <div className="relative shrink-0" style={{ width: size, height: size }}>
-      <div className="absolute inset-5 rounded-full bg-fuchsia-500/30 blur-2xl" />
+      <div className="absolute inset-5 rounded-full bg-[#cbb6ff]/50 blur-2xl" />
       <svg viewBox="0 0 148 148" className="relative h-full w-full -rotate-90">
-        <circle cx="74" cy="74" r={radius} fill="none" stroke="rgba(255,255,255,0.1)" strokeWidth="8" />
+        <circle cx="74" cy="74" r={radius} fill="none" stroke="rgba(106,47,240,0.16)" strokeWidth="8" />
         <motion.circle
           cx="74"
           cy="74"
@@ -81,13 +81,13 @@ export function LevelRing({
         />
         <defs>
           <linearGradient id={id} x1="0" y1="0" x2="1" y2="1">
-            <stop offset="0%" stopColor="#f0abfc" />
-            <stop offset="55%" stopColor="#d946ef" />
-            <stop offset="100%" stopColor="#7c3aed" />
+            <stop offset="0%" stopColor="#8b45ff" />
+            <stop offset="55%" stopColor="#6a2ff0" />
+            <stop offset="100%" stopColor="#4b17c9" />
           </linearGradient>
         </defs>
       </svg>
-      <div className="absolute inset-[16%] grid place-items-center rounded-full bg-gradient-to-br from-fuchsia-300 via-violet-600 to-[#2e1065] font-display text-3xl text-white shadow-[inset_0_0_24px_rgba(255,255,255,0.28)]">
+      <div className="absolute inset-[16%] grid place-items-center rounded-full bg-gradient-to-br from-[#7b3bff] to-[#4b17c9] font-display text-3xl text-white shadow-[inset_0_0_24px_rgba(255,255,255,0.35)]">
         {initials}
       </div>
     </div>
@@ -132,7 +132,7 @@ function ModalBody({ title, onClose, children }: { title: string; onClose: () =>
       <motion.button
         type="button"
         aria-label="Close"
-        className="absolute inset-0 bg-[#05020c]/75 backdrop-blur-md"
+        className="absolute inset-0 bg-[#1c0f45]/45 backdrop-blur-md"
         onClick={onClose}
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
@@ -147,7 +147,7 @@ function ModalBody({ title, onClose, children }: { title: string; onClose: () =>
       >
         <div className="mb-4 flex items-start justify-between gap-4">
           <h2 className="font-display text-2xl tracking-tight">{title}</h2>
-          <button type="button" onClick={onClose} className="grid h-10 w-10 place-items-center rounded-full border border-white/10 text-sm text-mist hover:bg-white/10">
+          <button type="button" onClick={onClose} className="grid h-10 w-10 place-items-center rounded-full border border-[#6a2ff033] bg-white text-sm text-mist hover:bg-[#f4eeff]">
             Close
           </button>
         </div>
@@ -190,7 +190,7 @@ export function CountUp({ value }: { value: number }) {
 
 export function chipClass(active: boolean) {
   return cn(
-    "min-h-10 rounded-full px-3.5 text-sm font-medium transition",
-    active ? "bg-white text-[#2e1065]" : "bg-white/5 text-mist hover:bg-white/10",
+    "min-h-10 rounded-full border border-transparent px-3.5 text-sm font-medium transition",
+    active ? "bg-gradient-to-br from-[#2a1170] to-[#6a2ff0] text-white shadow-[0_8px_20px_#5a1edc33]" : "border border-[#6a2ff026] bg-white text-mist hover:border-[#6a2ff059]",
   );
 }

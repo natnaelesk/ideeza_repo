@@ -31,7 +31,7 @@ export function ProfileView() {
       <section className="glass grid items-center gap-6 rounded-[32px] p-5 sm:grid-cols-[auto_1fr] sm:p-7">
         <LevelRing progress={cohort.level.progress} initials={cohort.profile.initials} size={132} />
         <div>
-          <p className="text-sm text-fuchsia-100">@{cohort.profile.handle}</p>
+          <p className="text-sm font-semibold text-[#6a2ff0]">@{cohort.profile.handle}</p>
           <h2 className="mt-1 font-display text-4xl">{cohort.level.level.name}</h2>
           <p className="mt-1 text-sm text-mist">
             {cohort.profile.city}
@@ -50,7 +50,7 @@ export function ProfileView() {
         <div className="glass rounded-[28px] p-5">
           <p className="text-sm leading-relaxed text-mist">Each friend who accepts this link adds {formatPoints(50)} points.</p>
           <div className="mt-4 flex flex-col gap-2 sm:flex-row">
-            <input readOnly value={cohort.profile.path} aria-label="Referral link" className="min-h-12 flex-1 rounded-2xl border border-white/10 bg-black/30 px-4 font-mono text-sm" />
+            <input readOnly value={cohort.profile.path} aria-label="Referral link" className="field min-h-12 flex-1 px-4 font-mono text-sm" />
             <button type="button" onClick={copy} className={primaryClass}>
               {copied ? "Copied" : "Copy link"}
             </button>
@@ -73,8 +73,8 @@ export function ProfileView() {
         <SectionTitle title="Badges" />
         <ul className="grid grid-cols-2 gap-3 sm:grid-cols-3 lg:grid-cols-4">
           {cohort.badges.map((badge) => (
-            <li key={badge.id} className={`rounded-3xl border p-4 ${badge.unlocked ? "border-fuchsia-300/30 bg-fuchsia-500/10" : "border-white/10 bg-white/[0.03] opacity-70"}`}>
-              <span className={`grid h-10 w-10 place-items-center rounded-2xl ${badge.unlocked ? "bg-white text-[#2e1065]" : "bg-white/10 text-mist"}`}>
+            <li key={badge.id} className={`rounded-3xl border p-4 ${badge.unlocked ? "border-[#6a2ff040] bg-[#f4eeff]" : "border-[#6a2ff01a] bg-white/80 opacity-70"}`}>
+              <span className={`grid h-10 w-10 place-items-center rounded-2xl ${badge.unlocked ? "bg-[#6a2ff0] text-white" : "bg-[#efe8ff] text-mist"}`}>
                 <Icon name={badge.icon} className="h-5 w-5" />
               </span>
               <h3 className="mt-3 font-display text-xl">{badge.name}</h3>
@@ -84,7 +84,7 @@ export function ProfileView() {
         </ul>
       </section>
 
-      <section className="rounded-3xl border border-white/10 p-5">
+      <section className="rounded-3xl border border-[#6a2ff01f] bg-white/70 p-5">
         <h2 className="font-display text-xl">Reset the demo</h2>
         <p className="mt-2 text-sm text-mist">Clears this browser back to Selam&apos;s opening scene: Maker, 2 referrals, one card waiting in History.</p>
         {confirmReset ? (
@@ -115,7 +115,7 @@ export function ProfileView() {
 
 function Stat({ label, value }: { label: string; value: ReactNode }) {
   return (
-    <div className="rounded-2xl bg-black/25 px-3 py-3">
+    <div className="rounded-2xl bg-[#efe8ff] px-3 py-3">
       <dt className="text-[10px] tracking-[0.16em] text-mist uppercase">{label}</dt>
       <dd className="mt-1 font-display text-2xl tabular-nums">{value}</dd>
     </div>

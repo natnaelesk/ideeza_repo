@@ -70,41 +70,41 @@ export function TradingCard({ card, onOpen }: { card: CardModel; onOpen: () => v
                 <span className="relative z-10 flex items-start justify-between gap-2">
                   <span className="font-display text-[1.15rem] leading-none tracking-tight">{card.title}</span>
                   <span className="shrink-0 text-right">
-                    <span className="block text-[9px] tracking-widest text-white/50 uppercase">Pts</span>
-                    <span className="font-display text-lg leading-none">{formatPoints(card.points)}</span>
+                    <span className="block text-[9px] font-semibold tracking-widest text-mist uppercase">Pts</span>
+                    <span className="font-display text-lg leading-none text-ink">{formatPoints(card.points)}</span>
                   </span>
                 </span>
-                <span className="relative z-10 mt-2 min-h-0 flex-1 overflow-hidden rounded-lg border border-white/15 bg-black/30">
+                <span className="relative z-10 mt-2 min-h-0 flex-1 overflow-hidden rounded-lg border border-[#6a2ff026] bg-white">
                   <Schematic seed={card.seed} />
                 </span>
-                <span className="relative z-10 mt-2 text-[10px] font-semibold tracking-[0.16em] text-fuchsia-100/80 uppercase">{category}</span>
-                <span className="relative z-10 mt-1 line-clamp-2 text-xs leading-snug text-white/80">{card.pitch}</span>
+                <span className="relative z-10 mt-2 text-[10px] font-semibold tracking-[0.16em] text-[#6a2ff0] uppercase">{category}</span>
+                <span className="relative z-10 mt-1 line-clamp-2 text-xs leading-snug text-mist">{card.pitch}</span>
                 <span className="relative z-10 mt-2 flex items-center justify-between">
                   <span className={cn("rounded-full px-2 py-0.5 text-[10px] font-bold tracking-[0.14em] uppercase", meta.chip)}>{meta.label}</span>
-                  <span className="text-sm tracking-widest text-amber-100" aria-hidden>
+                  <span className="text-sm tracking-widest text-[#b45309]" aria-hidden>
                     {meta.mark}
                   </span>
                 </span>
                 {locked ? (
-                  <span className="absolute top-12 right-3 z-10 rounded-full bg-black/70 px-2 py-1 text-[10px] tracking-widest uppercase">{card.availability}</span>
+                  <span className="absolute top-12 right-3 z-10 rounded-full border border-[#6a2ff026] bg-white/95 px-2 py-1 text-[10px] font-semibold tracking-widest text-ink uppercase">{card.availability}</span>
                 ) : null}
               </span>
             </button>
           </div>
           <div className={cn("card-face absolute inset-0 [transform:rotateY(180deg)]", !flipped && "pointer-events-none")}>
             <div className={cn("flex h-full flex-col rounded-[1.15rem] p-[7px]", `pack-${card.rarity}`)}>
-              <div className="flex h-full flex-col rounded-[0.7rem] bg-[#120816] p-4">
-                <p className="text-[10px] font-bold tracking-[0.16em] text-fuchsia-200 uppercase">
+              <div className={cn("flex h-full flex-col rounded-[0.7rem] p-4 text-ink", meta.frame)}>
+                <p className="text-[10px] font-bold tracking-[0.16em] text-[#6a2ff0] uppercase">
                   {meta.label} {meta.mark}
                 </p>
                 <h3 className="mt-2 font-display text-2xl leading-none">{card.title}</h3>
                 <p className="mt-3 flex-1 text-sm leading-relaxed text-mist">{card.pitch}</p>
-                <p className="text-sm text-white">{formatPoints(card.points)} points when approved</p>
+                <p className="text-sm font-semibold text-ink">{formatPoints(card.points)} points when approved</p>
                 <div className="mt-3 flex flex-col gap-2">
-                  <button type="button" className="min-h-11 rounded-full bg-white text-sm font-semibold text-[#2e1065]" onClick={onOpen} disabled={locked}>
+                  <button type="button" className="btn-primary" onClick={onOpen} disabled={locked}>
                     {locked ? card.availability : "Open challenge"}
                   </button>
-                  <button type="button" className="min-h-11 rounded-full border border-white/15 text-sm text-mist" onClick={() => setFlipped(false)}>
+                  <button type="button" className="btn-ghost" onClick={() => setFlipped(false)}>
                     Flip back
                   </button>
                 </div>
@@ -135,23 +135,23 @@ export function GoldenTicketCard() {
         >
           <div className={cn("card-face absolute inset-0", flipped && "pointer-events-none")}>
             <button type="button" onClick={() => setFlipped(true)} className="pack-golden relative h-full w-full rounded-[1.15rem] p-[7px] text-left" aria-label="Golden Ticket, super rare shiny card. Flip to read it.">
-              <span className="relative flex h-full flex-col overflow-hidden rounded-[0.7rem] bg-[#1a1204] px-2.5 pt-2 pb-2">
+              <span className="relative flex h-full flex-col overflow-hidden rounded-[0.7rem] bg-gradient-to-b from-[#fff8e8] to-white px-2.5 pt-2 pb-2 text-ink">
                 <span className="holo-shiny pointer-events-none absolute inset-0" />
                 <span className="relative z-10 flex items-start justify-between">
-                  <span className="rounded-full bg-amber-200 px-2 py-0.5 text-[10px] font-bold tracking-[0.14em] text-[#3b2604] uppercase">Shiny</span>
-                  <span className="text-xs font-bold tracking-[0.18em] text-amber-100 uppercase">Super rare</span>
+                  <span className="rounded-full bg-amber-300 px-2 py-0.5 text-[10px] font-bold tracking-[0.14em] text-[#3b2604] uppercase">Shiny</span>
+                  <span className="text-xs font-bold tracking-[0.18em] text-amber-800 uppercase">Super rare</span>
                 </span>
-                <span className="relative z-10 mt-3 grid flex-1 place-items-center rounded-lg border border-amber-200/40 bg-gradient-to-b from-amber-200/20 to-transparent">
+                <span className="relative z-10 mt-3 grid flex-1 place-items-center rounded-lg border border-amber-300/70 bg-white/70">
                   <span className="text-center">
-                    <span className="block text-3xl" aria-hidden>
+                    <span className="block text-3xl text-amber-600" aria-hidden>
                       ✦
                     </span>
-                    <span className="mt-2 block font-display text-3xl leading-none text-amber-50">Golden Ticket</span>
-                    <span className="mt-2 block text-xs tracking-[0.2em] text-amber-100/80 uppercase">Gift card</span>
+                    <span className="mt-2 block font-display text-3xl leading-none text-ink">Golden Ticket</span>
+                    <span className="mt-2 block text-xs font-semibold tracking-[0.2em] text-amber-800 uppercase">Gift card</span>
                   </span>
                 </span>
-                <span className="relative z-10 mt-2 text-xs leading-snug text-amber-50">The jackpot pull. A gift, not a task.</span>
-                <span className="relative z-10 mt-2 text-right text-sm tracking-[0.3em] text-amber-200" aria-hidden>
+                <span className="relative z-10 mt-2 text-xs leading-snug text-ink">The jackpot pull. A gift, not a task.</span>
+                <span className="relative z-10 mt-2 text-right text-sm tracking-[0.3em] text-amber-700" aria-hidden>
                   ✦ ✦ ✦
                 </span>
               </span>
@@ -159,16 +159,16 @@ export function GoldenTicketCard() {
           </div>
           <div className={cn("card-face absolute inset-0 [transform:rotateY(180deg)]", !flipped && "pointer-events-none")}>
             <div className="pack-golden flex h-full flex-col rounded-[1.15rem] p-[7px]">
-              <div className="flex h-full flex-col rounded-[0.7rem] bg-[#1a1204] p-4">
-                <p className="text-[10px] font-bold tracking-[0.16em] text-amber-200 uppercase">Shiny · Golden Ticket</p>
+              <div className="flex h-full flex-col rounded-[0.7rem] bg-gradient-to-b from-[#fff8e8] to-white p-4 text-ink">
+                <p className="text-[10px] font-bold tracking-[0.16em] text-amber-800 uppercase">Shiny · Golden Ticket</p>
                 <h3 className="mt-2 font-display text-2xl leading-none">Not a challenge</h3>
-                <p className="mt-3 flex-1 text-sm leading-relaxed text-amber-50/90">
+                <p className="mt-3 flex-1 text-sm leading-relaxed text-mist">
                   This is the rarest card in the pack. You unlock it with points, then redeem a gift: platform access, design credits, or printed IDEEZA hardware.
                 </p>
-                <Link href="/points" className="mt-3 grid min-h-11 place-items-center rounded-full bg-amber-200 text-sm font-semibold text-[#3b2604]">
+                <Link href="/points" className="btn-primary mt-3">
                   See how to unlock it
                 </Link>
-                <button type="button" className="mt-2 min-h-11 rounded-full border border-amber-200/30 text-sm text-amber-100" onClick={() => setFlipped(false)}>
+                <button type="button" className="btn-ghost mt-2" onClick={() => setFlipped(false)}>
                   Flip back
                 </button>
               </div>

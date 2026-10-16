@@ -11,9 +11,9 @@ import type { SubmissionStatus } from "@/lib/types";
 type Filter = "all" | SubmissionStatus;
 
 const STATUS: Record<SubmissionStatus, string> = {
-  pending: "bg-amber-200/15 text-amber-100",
-  approved: "bg-emerald-300/15 text-emerald-200",
-  rejected: "bg-rose-300/15 text-rose-100",
+  pending: "bg-amber-100 text-amber-900",
+  approved: "bg-emerald-100 text-emerald-800",
+  rejected: "bg-rose-100 text-rose-800",
 };
 
 export function HistoryView() {
@@ -33,7 +33,7 @@ export function HistoryView() {
       )}
       <div className="glass flex flex-col gap-4 rounded-[28px] p-4 sm:flex-row sm:items-center sm:justify-between">
         <div>
-          <p className="text-[11px] font-semibold tracking-[0.18em] text-fuchsia-200 uppercase">Profile total</p>
+          <p className="text-[11px] font-semibold tracking-[0.18em] text-[#6a2ff0] uppercase">Profile total</p>
           <p className="font-display text-4xl tabular-nums">
             <CountUp value={cohort.points} />
           </p>
@@ -48,9 +48,9 @@ export function HistoryView() {
             role="switch"
             aria-checked={demo}
             onClick={() => setDemo((value) => !value)}
-            className={cn("relative h-8 w-14 rounded-full p-1 transition", demo ? "bg-fuchsia-500" : "bg-white/15")}
+            className={cn("relative h-8 w-14 rounded-full p-1 transition", demo ? "bg-[#6a2ff0]" : "bg-[#e4d9ff]")}
           >
-            <span className={cn("block h-6 w-6 rounded-full bg-white transition", demo && "translate-x-6")} />
+            <span className={cn("block h-6 w-6 rounded-full bg-white shadow-sm transition", demo && "translate-x-6")} />
           </button>
         </div>
       </div>
@@ -62,7 +62,7 @@ export function HistoryView() {
         ))}
       </div>
       {rows.length === 0 ? (
-        <p className="rounded-3xl border border-white/10 p-6 text-sm text-mist">Nothing in this filter.</p>
+        <p className="rounded-3xl border border-[#6a2ff01f] bg-white/70 p-6 text-sm text-mist">Nothing in this filter.</p>
       ) : (
         <ul className="space-y-3">
           {rows.map((item) => (
@@ -76,7 +76,7 @@ export function HistoryView() {
                 </div>
                 <span className={cn("rounded-full px-2.5 py-1 text-xs font-semibold capitalize", STATUS[item.status])}>{item.status}</span>
               </div>
-              <p className="mt-3 text-sm leading-relaxed text-white/90">{item.note}</p>
+              <p className="mt-3 text-sm leading-relaxed text-ink">{item.note}</p>
               <p className="mt-2 truncate font-mono text-xs text-mist">{item.link}</p>
               <p className="mt-2 text-xs text-mist">
                 Sent {formatWhen(item.submittedAt)}
@@ -84,19 +84,19 @@ export function HistoryView() {
               </p>
               {item.response ? <p className="mt-2 text-sm text-mist">{item.response}</p> : null}
               {item.status === "approved" ? (
-                <p className="mt-3 font-display text-xl text-emerald-300">+{formatPoints(item.challenge.points)} on your total</p>
+                <p className="mt-3 font-display text-xl text-emerald-700">+{formatPoints(item.challenge.points)} on your total</p>
               ) : null}
               {item.status === "rejected" ? (
-                <Link href="/challenges" className="mt-3 inline-flex text-sm font-semibold text-fuchsia-200">
+                <Link href="/challenges" className="mt-3 inline-flex text-sm font-semibold text-[#6a2ff0]">
                   Card is back on Challenges
                 </Link>
               ) : null}
               {item.status === "pending" && demo ? (
-                <div className="mt-4 inline-flex rounded-full bg-black/40 p-1" role="group" aria-label={`Demo review for ${item.challenge.title}`}>
-                  <button type="button" className="min-h-10 rounded-full bg-emerald-300/20 px-4 text-sm font-semibold text-emerald-100" onClick={() => cohort.reviewSubmission(item.id, "approved")}>
+                <div className="mt-4 inline-flex rounded-full bg-[#efe8ff] p-1" role="group" aria-label={`Demo review for ${item.challenge.title}`}>
+                  <button type="button" className="min-h-10 rounded-full bg-emerald-100 px-4 text-sm font-semibold text-emerald-800" onClick={() => cohort.reviewSubmission(item.id, "approved")}>
                     Approve +{formatPoints(item.challenge.points)}
                   </button>
-                  <button type="button" className="min-h-10 rounded-full px-4 text-sm font-semibold text-rose-100" onClick={() => cohort.reviewSubmission(item.id, "rejected")}>
+                  <button type="button" className="min-h-10 rounded-full px-4 text-sm font-semibold text-rose-700" onClick={() => cohort.reviewSubmission(item.id, "rejected")}>
                     Reject
                   </button>
                 </div>

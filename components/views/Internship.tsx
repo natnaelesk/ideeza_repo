@@ -4,7 +4,7 @@ import { motion, useReducedMotion } from "framer-motion";
 import { useState, type FormEvent } from "react";
 import { Confetti } from "@/components/Confetti";
 import { Icon } from "@/components/icons";
-import { Modal, NextStep, PageHeader, ghostClass, primaryClass } from "@/components/ui";
+import { Modal, NextStep, PageHeader, fieldClass, ghostClass, primaryClass } from "@/components/ui";
 import { PROFILE } from "@/lib/catalog";
 import { cn, formatWhen, validEmail, validLink } from "@/lib/format";
 import { useCohort } from "@/lib/store";
@@ -23,9 +23,9 @@ export function InternshipView() {
       <PageHeader explain="Finish these steps, then apply. The reward is a studio seat, not money." title="Internship" />
       <InternshipNext onApply={() => setOpen(true)} />
       <ol className="relative space-y-4">
-        <div className="absolute top-6 bottom-6 left-6 w-px bg-white/10" aria-hidden>
+        <div className="absolute top-6 bottom-6 left-6 w-px bg-[#6a2ff026]" aria-hidden>
           <motion.div
-            className="w-full origin-top bg-gradient-to-b from-fuchsia-300 via-violet-500 to-amber-200"
+            className="w-full origin-top bg-gradient-to-b from-[#8b45ff] via-[#6a2ff0] to-[#fbbf24]"
             initial={false}
             animate={{ height: `${fill * 100}%` }}
             transition={reduce ? { duration: 0 } : { duration: 0.7 }}
@@ -36,18 +36,18 @@ export function InternshipView() {
             <div
               className={cn(
                 "relative z-10 grid h-12 w-12 place-items-center rounded-full border text-sm font-semibold",
-                stage.done && "border-emerald-300/50 bg-emerald-400/15",
-                stage.current && "border-fuchsia-300 bg-fuchsia-500/20 shadow-[0_0_24px_rgba(232,121,249,0.45)]",
-                stage.locked && "border-white/10 bg-[#120816] text-mist",
+                stage.done && "border-emerald-600/40 bg-emerald-50 text-emerald-800",
+                stage.current && "border-[#6a2ff0] bg-[#efe8ff] text-[#4b17c9] shadow-[0_8px_24px_#6a2ff040]",
+                stage.locked && "border-[#6a2ff01a] bg-[#f7f3ff] text-mist",
               )}
             >
               {stage.done ? <Icon name="check" className="h-5 w-5" /> : String(stage.index + 1).padStart(2, "0")}
             </div>
-            <article className={cn("rounded-[28px] border p-5", stage.kind === "final" ? "border-amber-200/30 bg-gradient-to-br from-amber-200/10 to-fuchsia-500/10" : "glass")}>
+            <article className={cn("rounded-[28px] border p-5", stage.kind === "final" ? "border-amber-300/70 bg-gradient-to-br from-[#fff8e8] to-[#f4eeff]" : "glass")}>
               <div className="flex flex-wrap items-center gap-2">
                 <h2 className="font-display text-2xl">{stage.title}</h2>
-                {stage.current ? <span className="rounded-full bg-white px-2 py-0.5 text-[10px] font-semibold tracking-widest text-[#2e1065] uppercase">Now</span> : null}
-                {stage.done ? <span className="text-xs text-emerald-300">Done</span> : null}
+                {stage.current ? <span className="rounded-full bg-[#6a2ff0] px-2 py-0.5 text-[10px] font-semibold tracking-widest text-white uppercase">Now</span> : null}
+                {stage.done ? <span className="text-xs font-semibold text-emerald-700">Done</span> : null}
               </div>
               <p className="mt-2 text-sm leading-relaxed text-mist">{stage.detail}</p>
               {stage.kind === "manual" && stage.current ? (
@@ -55,16 +55,16 @@ export function InternshipView() {
                   Mark this done
                 </button>
               ) : null}
-              {stage.kind === "manual" && stage.locked ? <p className="mt-3 text-sm text-white/70">Finish the previous stage first.</p> : null}
+              {stage.kind === "manual" && stage.locked ? <p className="mt-3 text-sm text-mist">Finish the previous stage first.</p> : null}
               {stage.kind === "final" && stage.current ? (
                 <button type="button" className={`${primaryClass} mt-4`} onClick={() => setOpen(true)}>
                   Apply
                 </button>
               ) : null}
-              {stage.kind === "final" && stage.locked ? <p className="mt-3 text-sm text-white/70">The Apply button opens when the showcase is done.</p> : null}
+              {stage.kind === "final" && stage.locked ? <p className="mt-3 text-sm text-mist">The Apply button opens when the showcase is done.</p> : null}
               {stage.kind === "final" && stage.done && cohort.application ? (
-                <div className="mt-4 rounded-2xl bg-black/25 p-4">
-                  <p className="text-[11px] tracking-[0.16em] text-amber-100 uppercase">Application saved {formatWhen(cohort.application.submittedAt)}</p>
+                <div className="mt-4 rounded-2xl bg-white/80 p-4">
+                  <p className="text-[11px] font-semibold tracking-[0.16em] text-amber-800 uppercase">Application saved {formatWhen(cohort.application.submittedAt)}</p>
                   <p className="mt-2 text-sm leading-relaxed">{cohort.application.why}</p>
                 </div>
               ) : null}
@@ -160,10 +160,10 @@ function ApplyModal({
           <Field label="City" value={city} onChange={setCity} />
           <label className="block text-sm">
             <span className="text-mist">Why this internship</span>
-            <textarea value={why} onChange={(event) => setWhy(event.target.value)} rows={4} className="mt-1 w-full rounded-2xl border border-white/10 bg-black/30 px-4 py-3 text-base outline-none" placeholder="The build you want to finish inside the studio." />
+            <textarea value={why} onChange={(event) => setWhy(event.target.value)} rows={4} className={`${fieldClass} py-3`} placeholder="The build you want to finish inside the studio." />
           </label>
           <Field label="Project link, optional" value={link} onChange={setLink} />
-          {error ? <p className="text-sm text-rose-200">{error}</p> : null}
+          {error ? <p className="text-sm text-rose-700">{error}</p> : null}
           <div className="flex flex-wrap gap-2 pt-2">
             <button type="submit" className={primaryClass}>
               Send application
@@ -192,7 +192,7 @@ function Field({
   return (
     <label className="block text-sm">
       <span className="text-mist">{label}</span>
-      <input type={type} value={value} onChange={(event) => onChange(event.target.value)} className="mt-1 min-h-12 w-full rounded-2xl border border-white/10 bg-black/30 px-4 text-base outline-none" />
+      <input type={type} value={value} onChange={(event) => onChange(event.target.value)} className={fieldClass} />
     </label>
   );
 }
