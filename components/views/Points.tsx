@@ -4,7 +4,7 @@ import { LayoutGroup, motion, useReducedMotion } from "framer-motion";
 import Link from "next/link";
 import { useEffect, useRef, useState } from "react";
 import { Icon } from "@/components/icons";
-import { Modal, PageHeader, SectionTitle, primaryClass } from "@/components/ui";
+import { Modal, NextStep, PageHeader, SectionTitle, primaryClass } from "@/components/ui";
 import { CATEGORIES } from "@/lib/catalog";
 import { formatPoints } from "@/lib/format";
 import { useCohort } from "@/lib/store";
@@ -25,11 +25,8 @@ export function PointsView() {
 
   return (
     <div className="space-y-12">
-      <PageHeader
-        kicker="Points system"
-        title="Earn it. Then take the gift."
-        lede="Four ways in: Refer, Build, Bug, and Show up. Golden Tickets redeem for platform access, design credits, and printed IDEEZA hardware. Rewards are gifts only. There is no cash."
-      />
+      <PageHeader explain="Points come from challenges and referrals. They unlock gifts, never cash." title="Points" />
+      <NextStep href="/profile" label="Refer a friend" />
 
       <section>
         <SectionTitle title="Four ways to earn" />
@@ -50,11 +47,10 @@ export function PointsView() {
                   <span className="font-display text-3xl tabular-nums">{headline}</span>
                 </span>
                 <span className="mt-4 block font-display text-2xl">{category.label}</span>
-                <span className="mt-1 block text-sm leading-relaxed text-mist">{category.line}</span>
-                <span className="mt-3 block text-sm text-white/80">
+                <span className="mt-1 block text-sm leading-relaxed text-mist">
                   {category.id === "refer"
-                    ? `+50 when a link is accepted, plus ${formatPoints(range.min)}–${formatPoints(range.max)} on a referral card.`
-                    : `Cards pay ${formatPoints(range.min)}–${formatPoints(range.max)} when a submission is approved.`}
+                    ? `+50 per friend, plus ${formatPoints(range.min)}–${formatPoints(range.max)} on a referral card.`
+                    : category.line}
                 </span>
               </Link>
             );
@@ -63,18 +59,18 @@ export function PointsView() {
       </section>
 
       <section>
-        <SectionTitle title="Golden Tickets" aside={<span className="text-sm text-mist">Redeem once you clear the line</span>} />
+        <SectionTitle title="Golden Tickets" aside={<span className="text-sm text-mist">Shiny gift cards</span>} />
         <div className="grid gap-3 lg:grid-cols-2">
           {cohort.tickets.map((ticket) => (
-            <article key={ticket.id} className="relative overflow-hidden rounded-[28px] border border-white/10 bg-gradient-to-br from-violet-500/20 via-fuchsia-500/10 to-transparent">
-              <div className="grid gap-4 p-5 sm:grid-cols-[1fr_auto] sm:items-center">
-                <div>
-                  <p className="text-[11px] font-semibold tracking-[0.18em] text-amber-100/90 uppercase">Golden Ticket</p>
+            <article key={ticket.id} className="pack-golden rounded-[28px] p-[3px]">
+              <div className="relative grid gap-4 overflow-hidden rounded-[25px] bg-[#1a1204] p-5 sm:grid-cols-[1fr_auto] sm:items-center">
+                <span className="holo-shiny pointer-events-none absolute inset-0" />
+                <div className="relative">
+                  <p className="text-[11px] font-semibold tracking-[0.18em] text-amber-100 uppercase">Shiny · Golden Ticket</p>
                   <h3 className="mt-1 font-display text-2xl">{ticket.name}</h3>
-                  <p className="mt-2 text-sm text-white">{ticket.reward}</p>
-                  <p className="mt-1 text-sm text-mist">{ticket.detail}</p>
+                  <p className="mt-2 text-sm text-amber-50">{ticket.reward}</p>
                 </div>
-                <div className="flex items-center justify-between gap-3 border-t border-dashed border-white/20 pt-4 sm:w-36 sm:flex-col sm:border-t-0 sm:border-l sm:pt-0 sm:pl-4">
+                <div className="relative flex items-center justify-between gap-3 border-t border-dashed border-amber-200/30 pt-4 sm:w-36 sm:flex-col sm:border-t-0 sm:border-l sm:pt-0 sm:pl-4">
                   <p className="font-display text-2xl tabular-nums">{formatPoints(ticket.points)}</p>
                   <button
                     type="button"

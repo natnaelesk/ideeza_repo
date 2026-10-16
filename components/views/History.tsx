@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { useState } from "react";
-import { CountUp, PageHeader, SectionTitle, chipClass } from "@/components/ui";
+import { CountUp, NextStep, PageHeader, chipClass } from "@/components/ui";
 import { RARITY_META } from "@/lib/catalog";
 import { cn, formatPoints, formatWhen } from "@/lib/format";
 import { useCohort } from "@/lib/store";
@@ -21,14 +21,16 @@ export function HistoryView() {
   const [filter, setFilter] = useState<Filter>("all");
   const [demo, setDemo] = useState(true);
   const rows = cohort.submissions.filter((item) => (filter === "all" ? true : item.status === filter));
+  const pending = cohort.spotlight;
 
   return (
     <div className="space-y-8">
-      <PageHeader
-        kicker="History"
-        title="What you sent, and what it paid."
-        lede="Pending work waits here. Approve it and the points animate into your profile total. Reject it and the card returns to Challenges."
-      />
+      <PageHeader explain="Approve a submission to add its points. Reject it and the card goes back." title="History" />
+      {pending ? (
+        <NextStep label={`Approve ${pending.challenge.title}`} onClick={() => cohort.reviewSubmission(pending.id, "approved")} />
+      ) : (
+        <NextStep href="/challenges" label="Do another challenge" />
+      )}
       <div className="glass flex flex-col gap-4 rounded-[28px] p-4 sm:flex-row sm:items-center sm:justify-between">
         <div>
           <p className="text-[11px] font-semibold tracking-[0.18em] text-fuchsia-200 uppercase">Profile total</p>
@@ -59,7 +61,6 @@ export function HistoryView() {
           </button>
         ))}
       </div>
-      <SectionTitle title="Submissions" aside={<span className="text-sm text-mist">{rows.length}</span>} />
       {rows.length === 0 ? (
         <p className="rounded-3xl border border-white/10 p-6 text-sm text-mist">Nothing in this filter.</p>
       ) : (

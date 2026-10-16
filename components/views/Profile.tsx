@@ -3,7 +3,7 @@
 import Link from "next/link";
 import { useState, type ReactNode } from "react";
 import { Icon } from "@/components/icons";
-import { CountUp, LevelRing, PageHeader, SectionTitle, ghostClass, primaryClass } from "@/components/ui";
+import { CountUp, LevelRing, NextStep, PageHeader, SectionTitle, ghostClass, primaryClass } from "@/components/ui";
 import { formatPoints } from "@/lib/format";
 import { useCohort } from "@/lib/store";
 
@@ -25,11 +25,8 @@ export function ProfileView() {
 
   return (
     <div className="space-y-12">
-      <PageHeader
-        kicker="Profile"
-        title={cohort.profile.name}
-        lede={`${cohort.profile.role} · ${cohort.profile.campus}. Your points, badges, and referral link stay in this browser.`}
-      />
+      <PageHeader explain="This is you in the cohort: your level, points, badges, and the link friends use to join." title={cohort.profile.name} />
+      <NextStep href="/internship" label="Open the internship path" />
 
       <section className="glass grid items-center gap-6 rounded-[32px] p-5 sm:grid-cols-[auto_1fr] sm:p-7">
         <LevelRing progress={cohort.level.progress} initials={cohort.profile.initials} size={132} />
@@ -51,9 +48,7 @@ export function ProfileView() {
       <section>
         <SectionTitle title="Referral link" />
         <div className="glass rounded-[28px] p-5">
-          <p className="text-sm leading-relaxed text-mist">
-            Copy builds a full link from this path. Each accepted invite adds {formatPoints(50)} points and ticks the referral count. Referral mission cards pay extra when approved.
-          </p>
+          <p className="text-sm leading-relaxed text-mist">Each friend who accepts this link adds {formatPoints(50)} points.</p>
           <div className="mt-4 flex flex-col gap-2 sm:flex-row">
             <input readOnly value={cohort.profile.path} aria-label="Referral link" className="min-h-12 flex-1 rounded-2xl border border-white/10 bg-black/30 px-4 font-mono text-sm" />
             <button type="button" onClick={copy} className={primaryClass}>

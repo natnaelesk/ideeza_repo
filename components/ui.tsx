@@ -1,6 +1,7 @@
 "use client";
 
 import { AnimatePresence, motion, useReducedMotion } from "framer-motion";
+import Link from "next/link";
 import { useEffect, useId, useRef, useState, type ReactNode } from "react";
 import { cn, formatPoints } from "@/lib/format";
 
@@ -10,13 +11,30 @@ export const primaryClass =
 export const ghostClass =
   "inline-flex min-h-11 items-center justify-center gap-2 rounded-full border border-white/15 bg-white/5 px-5 py-2.5 text-sm font-semibold text-white transition hover:bg-white/10 disabled:cursor-not-allowed disabled:opacity-40";
 
-export function PageHeader({ kicker, title, lede }: { kicker: string; title: string; lede: string }) {
+export function PageHeader({ explain, title }: { explain: string; title: string }) {
   return (
     <header className="max-w-2xl">
-      <p className="text-[11px] font-semibold tracking-[0.22em] text-fuchsia-200/80 uppercase">{kicker}</p>
-      <h1 className="mt-2 font-display text-[2.4rem] leading-[1.02] tracking-tight sm:text-5xl">{title}</h1>
-      <p className="mt-4 text-base leading-relaxed text-mist sm:text-lg">{lede}</p>
+      <p className="text-base leading-snug text-white sm:text-lg">{explain}</p>
+      <h1 className="mt-3 font-display text-[2.4rem] leading-[1.02] tracking-tight sm:text-5xl">{title}</h1>
     </header>
+  );
+}
+
+export function NextStep({ href, label, onClick }: { href?: string; label: string; onClick?: () => void }) {
+  const className = `${primaryClass} w-full sm:w-auto`;
+  return (
+    <div className="flex flex-col gap-3 rounded-2xl border border-fuchsia-300/30 bg-fuchsia-500/10 px-4 py-3 sm:flex-row sm:items-center sm:justify-between">
+      <p className="text-sm font-medium text-fuchsia-100">Next step</p>
+      {href ? (
+        <Link href={href} className={className}>
+          {label}
+        </Link>
+      ) : (
+        <button type="button" onClick={onClick} className={className}>
+          {label}
+        </button>
+      )}
+    </div>
   );
 }
 

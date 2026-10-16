@@ -4,7 +4,7 @@ import { motion, useReducedMotion } from "framer-motion";
 import { useState, type FormEvent } from "react";
 import { Confetti } from "@/components/Confetti";
 import { Icon } from "@/components/icons";
-import { Modal, PageHeader, ghostClass, primaryClass } from "@/components/ui";
+import { Modal, NextStep, PageHeader, ghostClass, primaryClass } from "@/components/ui";
 import { PROFILE } from "@/lib/catalog";
 import { cn, formatWhen, validEmail, validLink } from "@/lib/format";
 import { useCohort } from "@/lib/store";
@@ -20,11 +20,8 @@ export function InternshipView() {
 
   return (
     <div className="space-y-10">
-      <PageHeader
-        kicker="Internship roadmap"
-        title="From the circle to the studio."
-        lede="Walk the path. The last stage opens an application. In this demo the form stays on your device and ends in a celebration, not a server."
-      />
+      <PageHeader explain="Finish these steps, then apply. The reward is a studio seat, not money." title="Internship" />
+      <InternshipNext onApply={() => setOpen(true)} />
       <ol className="relative space-y-4">
         <div className="absolute top-6 bottom-6 left-6 w-px bg-white/10" aria-hidden>
           <motion.div
@@ -87,6 +84,15 @@ export function InternshipView() {
       {celebrating ? <Confetti fire={celebrating ? 2 : 0} /> : null}
     </div>
   );
+}
+
+function InternshipNext({ onApply }: { onApply: () => void }) {
+  const cohort = useCohort();
+  const current = cohort.stages.find((stage) => stage.current);
+  if (current?.kind === "final") return <NextStep label="Apply for the internship" onClick={onApply} />;
+  if (current?.kind === "manual") return <NextStep label={`Mark ${current.title} done`} onClick={() => cohort.completeStage(current.id)} />;
+  if (current) return <NextStep href="/challenges" label="Do a challenge" />;
+  return <NextStep href="/profile" label="Back to your profile" />;
 }
 
 function ApplyModal({

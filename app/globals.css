@@ -94,8 +94,77 @@ button:disabled {
   }
 }
 
+.pack-common {
+  background: #6d6780;
+}
+
+.pack-rare {
+  background: linear-gradient(145deg, #e0f2fe, #38bdf8 40%, #1e3a8a);
+}
+
+.pack-epic {
+  background: linear-gradient(145deg, #fae8ff, #e879f9 42%, #6d28d9);
+}
+
+.pack-legendary {
+  background: linear-gradient(145deg, #fff7d6, #fbbf24 40%, #b45309);
+  box-shadow: 0 0 28px rgba(251, 191, 36, 0.28);
+}
+
+.pack-golden {
+  background: linear-gradient(120deg, #fff4b0, #fbbf24, #fb7185, #67e8f9, #fde68a);
+  background-size: 220% 220%;
+  animation: shine-shift 5s linear infinite;
+  box-shadow: 0 0 36px rgba(251, 191, 36, 0.45);
+}
+
+.holo-rare,
+.holo-epic,
+.holo-legend,
+.holo-shiny {
+  background-image: linear-gradient(
+    105deg,
+    transparent 18%,
+    rgba(255, 255, 255, 0.55) 32%,
+    rgba(255, 80, 160, 0.35) 44%,
+    rgba(80, 220, 255, 0.4) 54%,
+    rgba(255, 230, 80, 0.4) 64%,
+    transparent 80%
+  );
+  background-size: 220% 220%;
+  background-position: var(--mx, 20%) var(--my, 30%);
+  mix-blend-mode: color-dodge;
+}
+
+.holo-rare {
+  opacity: 0.55;
+}
+
+.holo-epic {
+  opacity: 0.8;
+}
+
+.holo-legend {
+  opacity: 0.95;
+}
+
+.holo-shiny {
+  opacity: 1;
+  background-image: linear-gradient(115deg, #fff 0%, #fde68a 18%, #fb7185 36%, #67e8f9 54%, #e9d5ff 72%, #fde68a 100%);
+  animation: shine-shift 3.2s linear infinite;
+  mix-blend-mode: soft-light;
+}
+
+@keyframes shine-shift {
+  50% {
+    background-position: 100% 40%;
+  }
+}
+
 @media (prefers-reduced-motion: reduce) {
-  .orb {
+  .orb,
+  .pack-golden,
+  .holo-shiny {
     animation: none;
   }
 }

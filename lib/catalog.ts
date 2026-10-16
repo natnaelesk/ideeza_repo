@@ -145,31 +145,35 @@ export const CATEGORIES: { id: Category; label: string; line: string }[] = [
 
 export const RARITY_META: Record<
   Rarity,
-  { label: string; foil: string; chip: string; spin: boolean }
+  { label: string; mark: string; holo: string; frame: string; chip: string }
 > = {
   common: {
     label: "Common",
-    foil: "conic-gradient(from 90deg, #6d28d9, #ddd6fe, #4c1d95, #6d28d9)",
+    mark: "●",
+    holo: "",
+    frame: "bg-[#171320]",
     chip: "bg-white/10 text-violet-100",
-    spin: false,
   },
   rare: {
     label: "Rare",
-    foil: "conic-gradient(from 90deg, #22d3ee, #818cf8, #6d28d9, #22d3ee)",
+    mark: "◆",
+    holo: "holo-rare",
+    frame: "bg-[#101826]",
     chip: "bg-cyan-300/15 text-cyan-50",
-    spin: true,
   },
   epic: {
     label: "Epic",
-    foil: "conic-gradient(from 90deg, #e879f9, #a855f7, #fb7185, #e879f9)",
+    mark: "★",
+    holo: "holo-epic",
+    frame: "bg-[#1a1022]",
     chip: "bg-fuchsia-400/20 text-fuchsia-50",
-    spin: true,
   },
   legendary: {
     label: "Legendary",
-    foil: "conic-gradient(from 90deg, #fde68a, #f472b6, #c4b5fd, #67e8f9, #fde68a)",
+    mark: "★★",
+    holo: "holo-legend",
+    frame: "bg-[#1c1408]",
     chip: "bg-amber-200/20 text-amber-50",
-    spin: true,
   },
 };
 

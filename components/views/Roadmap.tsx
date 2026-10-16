@@ -4,7 +4,7 @@ import { AnimatePresence, motion, useReducedMotion } from "framer-motion";
 import Link from "next/link";
 import { useState } from "react";
 import { Icon } from "@/components/icons";
-import { LevelRing, SectionTitle } from "@/components/ui";
+import { LevelRing, NextStep, SectionTitle } from "@/components/ui";
 import { formatPoints } from "@/lib/format";
 import { useCohort } from "@/lib/store";
 
@@ -14,23 +14,22 @@ export function RoadmapView() {
   const [open, setOpen] = useState(cohort.level.level.id);
   const fill = (cohort.level.index + cohort.level.progress) / (cohort.levels.length - 1);
 
+  const steps = [
+    { href: "/join/selam-7k", label: "Join" },
+    { href: "/challenges", label: "Do challenges" },
+    { href: "/points", label: "Earn points" },
+    { href: "/profile", label: "Refer friends" },
+    { href: "/internship", label: "Unlock rewards & internship" },
+  ];
+
   return (
-    <div className="space-y-12">
+    <div className="space-y-10">
+      <p className="max-w-2xl text-base leading-snug text-white sm:text-lg">
+        Builders join, do challenge cards, earn points, refer friends, and unlock gifts plus an internship.
+      </p>
       <section className="grid items-center gap-8 lg:grid-cols-[1.3fr_auto]">
         <div>
-          <p className="text-[11px] font-semibold tracking-[0.22em] text-fuchsia-200/80 uppercase">Builders Cohort · Addis</p>
-          <h1 className="mt-3 max-w-xl font-display text-5xl leading-[0.95] tracking-tight sm:text-6xl">Ambassador roadmap</h1>
-          <p className="mt-4 max-w-xl text-base leading-relaxed text-mist sm:text-lg">
-            Six levels, from the first circle to Inner Circle. Points open badges and gifts: platform access, design credits, and printed IDEEZA hardware. No cash.
-          </p>
-          <div className="mt-6 flex flex-wrap gap-3">
-            <Link href="/challenges" className="inline-flex min-h-11 items-center rounded-full bg-white px-5 text-sm font-semibold text-[#2e1065]">
-              Pick a card
-            </Link>
-            <Link href="/points" className="inline-flex min-h-11 items-center rounded-full border border-white/15 px-5 text-sm font-semibold">
-              See the points
-            </Link>
-          </div>
+          <h1 className="max-w-xl font-display text-5xl leading-[0.95] tracking-tight sm:text-6xl">Ambassador roadmap</h1>
         </div>
         <div className="glass flex items-center gap-5 rounded-[28px] p-5">
           <LevelRing progress={cohort.level.progress} initials={cohort.profile.initials} />
@@ -49,15 +48,30 @@ export function RoadmapView() {
         </div>
       </section>
 
+      <section aria-label="How it works">
+        <h2 className="mb-3 font-display text-2xl">How it works</h2>
+        <ol className="flex gap-2 overflow-x-auto pb-1">
+          {steps.map((step, index) => (
+            <li key={step.label} className="flex items-center gap-2">
+              <Link href={step.href} className="glass block min-w-[10.5rem] rounded-2xl px-3 py-3 transition hover:border-fuchsia-300/40">
+                <span className="text-[11px] font-semibold text-fuchsia-200">Step {index + 1}</span>
+                <span className="mt-1 block text-sm font-semibold leading-snug">{step.label}</span>
+              </Link>
+              {index < steps.length - 1 ? (
+                <span className="text-lg text-fuchsia-200/80" aria-hidden>
+                  →
+                </span>
+              ) : null}
+            </li>
+          ))}
+        </ol>
+      </section>
+
       {cohort.spotlight ? (
-        <Link href="/history" className="glass block rounded-3xl px-5 py-4 transition hover:border-fuchsia-300/40">
-          <span className="text-[11px] font-semibold tracking-[0.18em] text-fuchsia-200 uppercase">Pending review</span>
-          <span className="mt-1 block font-display text-2xl">{cohort.spotlight.challenge.title}</span>
-          <span className="mt-1 block text-sm text-mist">
-            Approve it in History to add {formatPoints(cohort.spotlight.challenge.points)} points to your total.
-          </span>
-        </Link>
-      ) : null}
+        <NextStep href="/history" label={`Approve ${cohort.spotlight.challenge.title}`} />
+      ) : (
+        <NextStep href="/challenges" label="Do a challenge" />
+      )}
 
       <section>
         <SectionTitle title="The journey" aside={<span className="text-sm text-mist">{cohort.badges.filter((badge) => badge.unlocked).length} badges lit</span>} />

@@ -2,8 +2,8 @@
 
 import Link from "next/link";
 import { useMemo, useState, type FormEvent } from "react";
-import { TradingCard } from "@/components/TradingCard";
-import { Modal, PageHeader, SectionTitle, chipClass, ghostClass, primaryClass } from "@/components/ui";
+import { GoldenTicketCard, TradingCard } from "@/components/TradingCard";
+import { Modal, NextStep, PageHeader, chipClass, ghostClass, primaryClass } from "@/components/ui";
 import { CATEGORIES, RARITY_META, RARITY_ORDER } from "@/lib/catalog";
 import { cn, formatPoints, validLink } from "@/lib/format";
 import { useCohort } from "@/lib/store";
@@ -61,11 +61,11 @@ export function ChallengesView() {
 
   return (
     <div className="space-y-8">
-      <PageHeader
-        kicker="Tasks and challenges"
-        title="Draw a card. Ship the work."
-        lede="Flip a card, read the mission, and submit a link plus a note. Rarity sets the points. Approved work moves into your profile total."
-      />
+      <PageHeader explain="Pick a card, do the task, and submit a link. Rarer cards are worth more points." title="Challenge cards" />
+      <p className="text-sm text-mist">
+        Common <span aria-hidden>●</span> · Rare <span aria-hidden>◆</span> · Epic <span aria-hidden>★</span> · Legendary <span aria-hidden>★★</span> · Golden Ticket is the shiny gift card.
+      </p>
+      <NextStep href="/history" label="Review submissions in History" />
       <div className="flex flex-wrap gap-2">
         <button type="button" className={chipClass(filter === "all")} onClick={() => setFilter("all")}>
           All
@@ -79,8 +79,7 @@ export function ChallengesView() {
           {showDone ? "Hide finished" : "Show finished"}
         </button>
       </div>
-      <SectionTitle title="The table" aside={<span className="text-sm text-mist">{cards.length} showing</span>} />
-      {cards.length === 0 ? (
+      {cards.length === 0 && filter !== "all" ? (
         <div className="glass rounded-[28px] p-8 text-center">
           <p className="font-display text-3xl">The deck is clear.</p>
           <p className="mt-2 text-sm text-mist">Everything in this filter is pending or approved. History can send a card back.</p>
@@ -90,6 +89,7 @@ export function ChallengesView() {
         </div>
       ) : (
         <div className="grid grid-cols-1 gap-5 sm:grid-cols-2 xl:grid-cols-3">
+          {filter === "all" ? <GoldenTicketCard /> : null}
           {cards.map((card) => (
             <TradingCard key={card.id} card={card} onOpen={() => setActiveId(card.id)} />
           ))}
