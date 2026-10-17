@@ -2,7 +2,6 @@ import type { Metadata, Viewport } from "next";
 import { Poppins } from "next/font/google";
 import type { ReactNode } from "react";
 import { Shell } from "@/components/Shell";
-import { CohortProvider } from "@/lib/store";
 import "./globals.css";
 
 const poppins = Poppins({
@@ -14,11 +13,10 @@ const poppins = Poppins({
 
 export const metadata: Metadata = {
   title: {
-    default: "IDEEZA Builders Cohort",
+    default: "IDEEZA Builders",
     template: "%s · IDEEZA Builders",
   },
-  description:
-    "Front-end demo of the IDEEZA Builders Cohort: ambassador levels, gift rewards, challenge cards, and an internship roadmap saved in the browser.",
+  description: "A three-page demo of the IDEEZA Build The Future campaign: leaderboard, challenges, and a sample profile.",
 };
 
 export const viewport: Viewport = {
@@ -31,9 +29,7 @@ export default function RootLayout({ children }: { children: ReactNode }) {
   return (
     <html lang="en" className={`${poppins.variable} h-full antialiased`}>
       <body className="flex min-h-full flex-col overflow-x-clip bg-deep text-ink">
-        <CohortProvider>
-          <Shell>{children}</Shell>
-        </CohortProvider>
+        <Shell>{children}</Shell>
       </body>
     </html>
   );

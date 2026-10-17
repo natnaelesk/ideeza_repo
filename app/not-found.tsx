@@ -2,11 +2,12 @@ import Link from "next/link";
 
 export default function NotFound() {
   return (
-    <div className="mx-auto max-w-lg py-24 text-center">
-      <p className="text-[11px] font-semibold tracking-[0.22em] text-[#6a2ff0] uppercase">Missing page</p>
-      <h1 className="mt-3 font-display text-4xl">This route is off the board.</h1>
-      <Link href="/" className="btn-primary mt-8">
-        Back to the roadmap
+    <div className="mx-auto max-w-lg py-20 text-center">
+      <p className="text-sm font-bold tracking-wide text-[#6a2ff0] uppercase">Missing page</p>
+      <h1 className="mt-2 text-4xl font-extrabold tracking-tight">That page is not in this demo.</h1>
+      <p className="mt-3 text-sm text-mist">The walkthrough is Home, Challenges, and Profile.</p>
+      <Link href="/" className="btn-primary mt-6">
+        Back to Home
       </Link>
     </div>
   );
