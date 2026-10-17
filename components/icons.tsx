@@ -12,7 +12,7 @@ const stroke: Record<IconName, string> = {
   spark: "M12 3.2 13.8 8l5 1.2-3.8 3.2 1.2 5L12 15.2 7.8 17.4l1.2-5L5.2 9.2 10.2 8z",
   users: "M8.2 11.2a2.6 2.6 0 1 0-2.6-2.6 2.6 2.6 0 0 0 2.6 2.6zm7.2.4a2.2 2.2 0 1 0-2.2-2.2 2.2 2.2 0 0 0 2.2 2.2zM3.4 18.8v-.8A3.2 3.2 0 0 1 6.6 14.8h3.2a3.2 3.2 0 0 1 3.2 3.2v.8M13.4 15h.8a2.8 2.8 0 0 1 2.8 2.8v1",
   pencil: "M14.2 5.2 18.8 9.8 8.2 20.4H3.6v-4.6zM12.6 6.8l4.6 4.6",
-  quote: "M9.2 16.8c-2.4 0-4-1.6-4-4.2V7.2h4.2v5.2H7.6c.2 1.2.8 1.8 1.6 1.8zm9.2 0c-2.4 0-4-1.6-4-4.2V7.2H18.6v5.2h-1.8c.2 1.2.8 1.8 1.6 1.8z",
+  quote: "M5 6.8h11.2a2 2 0 0 1 2 2V14a2 2 0 0 1-2 2H10l-3.4 3.2V16H5a2 2 0 0 1-2-2V8.8a2 2 0 0 1 2-2z",
 };
 
 /** Brand marks from Simple Icons (CC0). Stored locally so the demo does not hotlink. */
@@ -27,6 +27,14 @@ const brands: Record<Platform, string> = {
 };
 
 export function Icon({ name, className }: { name: IconName; className?: string }) {
+  if (name === "coin") {
+    return (
+      <svg viewBox="0 0 24 24" className={className} aria-hidden>
+        <circle cx="12" cy="12" r="8.2" fill="currentColor" />
+        <path d="M12 7.6 13 10.2l2.8.4-2.1 1.8.6 2.7L12 13.8l-2.3 1.3.6-2.7-2.1-1.8 2.8-.4z" fill="#fff" />
+      </svg>
+    );
+  }
   return (
     <svg viewBox="0 0 24 24" className={className} fill="none" stroke="currentColor" strokeWidth="1.7" strokeLinecap="round" strokeLinejoin="round" aria-hidden>
       <path d={stroke[name]} />
